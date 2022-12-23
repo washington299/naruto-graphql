@@ -32,7 +32,7 @@ export const MenuMobile = () => {
 
 	return (
 		<>
-			<IconButton sx={{ display: { xs: 'block', sm: 'none' } }} onClick={toggleMenuMobile}>
+			<IconButton sx={{ display: { xs: 'block', sm: 'none' }, pb: 0 }} onClick={toggleMenuMobile}>
 				<Menu />
 			</IconButton>
 

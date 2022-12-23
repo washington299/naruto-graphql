@@ -2,6 +2,8 @@ import NextLink from 'next/link';
 import { Typography, Avatar, Link } from '@mui/material';
 
 export const Logo = () => {
+	const menuHamburguerSize = '24px';
+
 	return (
 		<Link
 			component={NextLink}
@@ -15,6 +17,7 @@ export const Logo = () => {
 				sx={{
 					width: { xs: 40, sm: 50 },
 					height: { xs: 40, sm: 50 },
+					transform: { xs: `translateX(-${menuHamburguerSize})`, sm: 'translateX(0)' },
 				}}
 			/>
 			<Typography
