@@ -4,7 +4,6 @@ import {
 	AppBar,
 	Toolbar,
 	Typography,
-	Avatar,
 	Box,
 	Link,
 	IconButton,
@@ -18,6 +17,8 @@ import {
 } from '@mui/material';
 import { Menu, Person, MapsHomeWork, Diversity3 } from '@mui/icons-material';
 import { useTheme } from '@mui/material/styles';
+
+import { Logo } from '../Logo';
 
 type MenuItemIconsProps = {
 	[key: string]: JSX.Element;
@@ -75,37 +76,17 @@ export const Header = () => {
 					</Box>
 				</Drawer>
 				<Box
-					component="nav"
 					sx={{
 						display: 'flex',
 						flex: 1,
 						justifyContent: { xs: 'center', sm: 'normal' },
 					}}
 				>
-					<Link
-						component={NextLink}
-						href="/"
-						underline="none"
-						sx={{ display: 'flex', alignItems: 'center' }}
-					>
-						<Avatar
-							src="/assets/images/naruto.png"
-							alt="Naruto face"
-							sx={{
-								width: { xs: 40, sm: 50 },
-								height: { xs: 40, sm: 50 },
-							}}
-						/>
-						{matches && (
-							<Typography component="span" variant="h5" color="black" fontWeight={500} ml={1}>
-								Naruto
-							</Typography>
-						)}
-					</Link>
+					<Logo />
 				</Box>
 
 				{matches && (
-					<Box sx={{ display: 'flex', alignItems: 'center' }}>
+					<Box component="nav" sx={{ display: 'flex', alignItems: 'center' }}>
 						{menuItems.map((item) => (
 							<Link
 								key={item}
