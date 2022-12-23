@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 import { Menu, Person, MapsHomeWork, Diversity3 } from '@mui/icons-material';
 
-import { menuItems } from '../Header';
+import { menuItems } from 'components/Header';
 
 type MenuItemIconsProps = {
 	[key: string]: JSX.Element;

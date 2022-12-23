@@ -1,8 +1,8 @@
 import NextLink from 'next/link';
 import { AppBar, Toolbar, Typography, Box, Link } from '@mui/material';
 
-import { Logo } from '../Logo';
-import { MenuMobile } from '../MenuMobile';
+import { Logo } from 'components/Logo';
+import { MenuMobile } from 'components/MenuMobile';
 
 export const menuItems = ['Characters', 'Villages', 'Clans'];
 
