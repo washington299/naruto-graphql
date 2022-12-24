@@ -8,7 +8,7 @@ export const menuItems = ['Characters', 'Villages', 'Clans'];
 
 export const Header = () => {
 	return (
-		<AppBar color="default">
+		<AppBar color="default" position="static">
 			<Toolbar sx={{ justifyContent: 'space-between' }}>
 				<MenuMobile />
 
