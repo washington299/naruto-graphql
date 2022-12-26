@@ -2,6 +2,8 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { GlobalStyles } from '@mui/material';
 
+import { Layout } from 'components/Layout';
+
 import { globalStyles } from 'styles/globalStyles';
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -12,7 +14,10 @@ export default function App({ Component, pageProps }: AppProps) {
 			</Head>
 
 			<GlobalStyles styles={globalStyles} />
-			<Component {...pageProps} />
+
+			<Layout>
+				<Component {...pageProps} />
+			</Layout>
 		</>
 	);
 }

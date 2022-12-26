@@ -1,6 +1,5 @@
 import Head from 'next/head';
 
-import { Header } from 'components/Header';
 import { HomeCards } from 'components/HomeCards';
 
 export default function Home() {
@@ -9,7 +8,6 @@ export default function Home() {
 			<Head>
 				<title>Naruto - Home</title>
 			</Head>
-			<Header />
 
 			<HomeCards />
 		</>
