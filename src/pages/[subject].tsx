@@ -1,9 +1,11 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Typography, Grid } from '@mui/material';
-import { Person, MapsHomeWork, Diversity3 } from '@mui/icons-material';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import Person from '@mui/icons-material/Person';
+import MapsHomeWork from '@mui/icons-material/MapsHomeWork';
+import Diversity3 from '@mui/icons-material/Diversity3';
 
 import { firstLetterUppercase } from 'utils/FirstLetterUppercase';
 

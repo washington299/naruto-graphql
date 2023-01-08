@@ -11,7 +11,10 @@ import {
 	ListItemIcon,
 	ListItemText,
 } from '@mui/material';
-import { Menu, Person, MapsHomeWork, Diversity3 } from '@mui/icons-material';
+import Menu from '@mui/icons-material/Menu';
+import Person from '@mui/icons-material/Person';
+import MapsHomeWork from '@mui/icons-material/MapsHomeWork';
+import Diversity3 from '@mui/icons-material/Diversity3';
 
 import { menuItems } from 'components/Header';
 

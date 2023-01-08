@@ -14,7 +14,7 @@ import {
 
 import { Container } from 'components/Container';
 
-import { homeCardsMock } from './mock';
+import { homeCardsData } from './homeCardsData';
 
 export const HomeCards = () => {
 	const [showMoreCard, setShowMoreCard] = useState<{ [key: string]: boolean }>({
@@ -32,7 +32,7 @@ export const HomeCards = () => {
 	return (
 		<Container>
 			<Grid container spacing={4}>
-				{homeCardsMock.map(({ src, name, description }) => {
+				{homeCardsData.map(({ src, name, description }) => {
 					const isShowMoreActive = showMoreCard[name];
 					const descriptionText = `${description.substring(
 						0,

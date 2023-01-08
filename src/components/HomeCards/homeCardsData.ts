@@ -1,4 +1,4 @@
-export const homeCardsMock = [
+export const homeCardsData = [
 	{
 		src: '/assets/images/naruto-characters.png',
 		name: 'Characters',
