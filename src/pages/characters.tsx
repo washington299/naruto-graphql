@@ -1,13 +1,10 @@
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 import { Typography, Grid } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Person from '@mui/icons-material/Person';
 import MapsHomeWork from '@mui/icons-material/MapsHomeWork';
 import Diversity3 from '@mui/icons-material/Diversity3';
-
-import { firstLetterUppercase } from 'utils/FirstLetterUppercase';
 
 import { Container } from 'components/Container';
 import { CharacterCard } from 'components/CharacterCard';
@@ -19,9 +16,6 @@ type MenuItemIconsProps = {
 export default function Page() {
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.up('lg'));
-	const { query, isReady } = useRouter();
-
-	const subject = query.subject as string;
 
 	const menuItemIcons: MenuItemIconsProps = {
 		characters: <Person fontSize="large" sx={{ marginLeft: 1 }} />,
@@ -29,12 +23,10 @@ export default function Page() {
 		clans: <Diversity3 fontSize="large" sx={{ marginLeft: 1 }} />,
 	};
 
-	if (!isReady) return <div>Loading...</div>;
-
 	return (
 		<>
 			<Head>
-				<title>Naruto - {subject}</title>
+				<title>Naruto - Characters</title>
 			</Head>
 			<Container>
 				<Typography
@@ -43,7 +35,7 @@ export default function Page() {
 					variant="h4"
 					sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
 				>
-					{firstLetterUppercase(subject)} {menuItemIcons[subject]}
+					Characters {menuItemIcons['characters']}
 				</Typography>
 
 				<Grid container spacing={matches ? 1 : 4}>
