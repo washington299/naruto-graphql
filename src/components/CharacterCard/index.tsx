@@ -1,15 +1,22 @@
+import { SyntheticEvent } from 'react';
 import Link from 'next/link';
-import { Card, CardMedia, CardContent, Typography } from '@mui/material';
+import { Card, CardContent, Typography } from '@mui/material';
+
+import { DEFAULT_IMG_ERROR } from 'const';
 
 type CharacterCardProps = {
 	id: string;
-	avatarSrc: string;
+	avatarSrc: string | null | undefined;
 	name: string;
-	age?: number | null;
-	rank: string;
+	age: number | null | undefined;
+	rank: string | null | undefined;
 };
 
 export const CharacterCard = ({ id, avatarSrc, name, age, rank }: CharacterCardProps) => {
+	const handleImgError = (e: SyntheticEvent<HTMLImageElement, Event>) => {
+		e.currentTarget.src = DEFAULT_IMG_ERROR;
+	};
+
 	return (
 		<Card
 			sx={{
@@ -20,10 +27,11 @@ export const CharacterCard = ({ id, avatarSrc, name, age, rank }: CharacterCardP
 			}}
 		>
 			<Link href={`/character/${id}`} style={{ textDecoration: 'none' }}>
-				<CardMedia
-					image={avatarSrc}
+				<img
+					src={avatarSrc || DEFAULT_IMG_ERROR}
 					title={`Character - ${name}`}
-					sx={{ width: '100%', height: 300 }}
+					onError={handleImgError}
+					style={{ width: '100%', height: 300 }}
 				/>
 				<CardContent>
 					<Typography
@@ -34,15 +42,15 @@ export const CharacterCard = ({ id, avatarSrc, name, age, rank }: CharacterCardP
 					>
 						{name}
 					</Typography>
-					{!!age && (
-						<Typography
-							gutterBottom
-							variant="subtitle1"
-							sx={{ color: 'black', fontWeight: 'normal' }}
-						>
-							Age: {age} years old
-						</Typography>
-					)}
+
+					<Typography
+						gutterBottom
+						variant="subtitle1"
+						sx={{ color: 'black', fontWeight: 'normal' }}
+					>
+						Age: {age ? `${age} years old` : 'unknown'}
+					</Typography>
+
 					{!!rank && (
 						<Typography
 							gutterBottom
