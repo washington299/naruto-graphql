@@ -12,21 +12,10 @@ import {
 	ListItemText,
 } from '@mui/material';
 import Menu from '@mui/icons-material/Menu';
-import Person from '@mui/icons-material/Person';
-import MapsHomeWork from '@mui/icons-material/MapsHomeWork';
-import Diversity3 from '@mui/icons-material/Diversity3';
+
+import { menuItemIcons } from 'const';
 
 import { menuItems } from 'components/Header';
-
-type MenuItemIconsProps = {
-	[key: string]: JSX.Element;
-};
-
-const menuItemIcons: MenuItemIconsProps = {
-	Characters: <Person />,
-	Villages: <MapsHomeWork />,
-	Clans: <Diversity3 />,
-};
 
 export const MenuMobile = () => {
 	const [menuMobileOpen, setMenuMobileOpen] = useState(false);
