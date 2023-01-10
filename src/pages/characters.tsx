@@ -1,12 +1,10 @@
 import Head from 'next/head';
 import { useQuery } from '@apollo/client';
-import { Typography, Grid } from '@mui/material';
+import { Typography, Grid, Box, CircularProgress } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 import { GET_CHARACTERS } from 'graphql/getCharacters';
-
-import { menuItemIcons } from 'const';
 
 import { Container } from 'components/Container';
 import { CharacterCard } from 'components/CharacterCard';
@@ -16,6 +14,7 @@ export default function Page() {
 	const matches = useMediaQuery(theme.breakpoints.up('lg'));
 
 	const { data, loading } = useQuery(GET_CHARACTERS);
+
 	return (
 		<>
 			<Head>
@@ -28,11 +27,13 @@ export default function Page() {
 					variant="h4"
 					sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
 				>
-					Characters {menuItemIcons['characters']}
+					Characters
 				</Typography>
 
 				{loading ? (
-					<div>Loading...</div>
+					<Box sx={{ display: 'flex', justifyContent: 'center', marginTop: 6 }}>
+						<CircularProgress />
+					</Box>
 				) : (
 					<Grid container spacing={matches ? 1 : 4}>
 						{data?.characters?.results?.map(({ id, avatarSrc, name, age, rank }) => (
