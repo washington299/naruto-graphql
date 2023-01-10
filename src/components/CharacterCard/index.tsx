@@ -26,7 +26,7 @@ export const CharacterCard = ({ id, avatarSrc, name, age, rank }: CharacterCardP
 				':hover': { lg: { transform: 'scale(1)' } },
 			}}
 		>
-			<Link href={`/character/${id}`} style={{ textDecoration: 'none' }}>
+			<Link href={`/characters/${id}`} style={{ textDecoration: 'none' }}>
 				<img
 					src={avatarSrc || DEFAULT_IMG_ERROR}
 					title={`Character - ${name}`}
