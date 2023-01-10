@@ -18,7 +18,10 @@ export default function Page() {
 
 	const { data, loading } = useQuery(GET_CHARACTERS, { variables: { page } });
 
-	const handlePagination = (_e: React.ChangeEvent<unknown>, value: number) => setPage(value);
+	const handlePagination = (_e: React.ChangeEvent<unknown>, value: number) => {
+		window.scrollTo(0, 0);
+		setPage(value);
+	};
 
 	return (
 		<>
