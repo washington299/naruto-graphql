@@ -1,6 +1,6 @@
-import { SyntheticEvent } from 'react';
+import { SyntheticEvent, useState } from 'react';
 import Link from 'next/link';
-import { Card, CardContent, Typography } from '@mui/material';
+import { Card, CardContent, Typography, Skeleton } from '@mui/material';
 
 import { DEFAULT_IMG_ERROR } from 'const';
 
@@ -13,6 +13,8 @@ type CharacterCardProps = {
 };
 
 export const CharacterCard = ({ id, avatarSrc, name, age, rank }: CharacterCardProps) => {
+	const [loadingImg, setLoadingImg] = useState(true);
+
 	const handleImgError = (e: SyntheticEvent<HTMLImageElement, Event>) => {
 		e.currentTarget.src = DEFAULT_IMG_ERROR;
 	};
@@ -27,11 +29,13 @@ export const CharacterCard = ({ id, avatarSrc, name, age, rank }: CharacterCardP
 			}}
 		>
 			<Link href={`/characters/${id}`} style={{ textDecoration: 'none' }}>
+				{loadingImg && <Skeleton variant="rectangular" width="100%" height={300} />}
 				<img
 					src={avatarSrc || DEFAULT_IMG_ERROR}
 					title={`Character - ${name}`}
 					onError={handleImgError}
-					style={{ width: '100%', height: 300 }}
+					style={{ width: '100%', height: loadingImg ? 0 : 300 }}
+					onLoad={() => setLoadingImg(false)}
 				/>
 				<CardContent>
 					<Typography
