@@ -13,6 +13,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel-plugin for production.
  */
 const documents = {
+    "\n\tquery getCharacter($id: String!) {\n\t\tcharacter(id: $id) {\n\t\t\tid: _id\n\t\t\tname\n\t\t\tfirstAnimeAppearance\n\t\t\tfirstMangaAppearance\n\t\t\tage\n\t\t\tavatarSrc\n\t\t\tdescription\n\t\t\trank\n\t\t\tvillage\n\t\t}\n\t}\n": types.GetCharacterDocument,
     "\n\tquery getCharacters($page: Int) {\n\t\tcharacters(page: $page) {\n\t\t\tinfo {\n\t\t\t\tcount\n\t\t\t\tpages\n\t\t\t\tprev\n\t\t\t\tnext\n\t\t\t}\n\t\t\tresults {\n\t\t\t\tid: _id\n\t\t\t\tname\n\t\t\t\tage\n\t\t\t\tavatarSrc\n\t\t\t\trank\n\t\t\t}\n\t\t}\n\t}\n": types.GetCharactersDocument,
 };
 
@@ -30,6 +31,10 @@ const documents = {
 **/
 export function gql(source: string): unknown;
 
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n\tquery getCharacter($id: String!) {\n\t\tcharacter(id: $id) {\n\t\t\tid: _id\n\t\t\tname\n\t\t\tfirstAnimeAppearance\n\t\t\tfirstMangaAppearance\n\t\t\tage\n\t\t\tavatarSrc\n\t\t\tdescription\n\t\t\trank\n\t\t\tvillage\n\t\t}\n\t}\n"): (typeof documents)["\n\tquery getCharacter($id: String!) {\n\t\tcharacter(id: $id) {\n\t\t\tid: _id\n\t\t\tname\n\t\t\tfirstAnimeAppearance\n\t\t\tfirstMangaAppearance\n\t\t\tage\n\t\t\tavatarSrc\n\t\t\tdescription\n\t\t\trank\n\t\t\tvillage\n\t\t}\n\t}\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
