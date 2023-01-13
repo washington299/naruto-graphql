@@ -6,6 +6,7 @@ import { Box, CircularProgress, Typography } from '@mui/material';
 
 import { client } from 'graphql/client';
 import { GET_CHARACTER } from 'graphql/getCharacter';
+import { GET_CHARACTERS } from 'graphql/getCharacters';
 import { Character } from 'graphql/__generated__/graphql';
 
 import { DEFAULT_IMG_ERROR } from 'const';
@@ -17,20 +18,9 @@ type CharacterProps = {
 };
 
 const Page = ({ character }: CharacterProps) => {
-	const {
-		name,
-		avatarSrc,
-		age,
-		firstAnimeAppearance,
-		firstMangaAppearance,
-		description,
-		rank,
-		village,
-	} = character;
-
 	const { isFallback } = useRouter();
 
-	const title = `Character - ${name}`;
+	const title = `Character - ${character?.name}`;
 
 	const handleImgError = (e: SyntheticEvent<HTMLImageElement, Event>) => {
 		e.currentTarget.src = DEFAULT_IMG_ERROR;
@@ -53,8 +43,8 @@ const Page = ({ character }: CharacterProps) => {
 			<Container>
 				<Box sx={{ display: { md: 'flex' } }}>
 					<img
-						src={avatarSrc || DEFAULT_IMG_ERROR}
-						alt={name}
+						src={character?.avatarSrc || DEFAULT_IMG_ERROR}
+						alt={character?.name}
 						width="100%"
 						height={400}
 						style={{ maxWidth: 800, minWidth: 320 }}
@@ -67,55 +57,55 @@ const Page = ({ character }: CharacterProps) => {
 							gutterBottom
 							sx={{ textAlign: 'center', marginTop: 1 }}
 						>
-							{name}
+							{character?.name}
 						</Typography>
 
 						<Typography variant="body1" gutterBottom>
 							Age:{' '}
 							<Typography color="GrayText" component="span">
-								{age ? `${age} years old` : 'unknown'}.
+								{character?.age ? `${character?.age} years old` : 'unknown'}.
 							</Typography>
 						</Typography>
 
 						<Typography variant="body1" gutterBottom>
 							Rank:{' '}
 							<Typography color="GrayText" component="span">
-								{rank}.
+								{character?.rank}.
 							</Typography>
 						</Typography>
 
-						{!!firstAnimeAppearance && (
+						{!!character?.firstAnimeAppearance && (
 							<Typography variant="body1" gutterBottom>
 								First anime appearance:{' '}
 								<Typography color="GrayText" component="span">
-									{firstAnimeAppearance}.
+									{character?.firstAnimeAppearance}.
 								</Typography>
 							</Typography>
 						)}
 
-						{!!firstMangaAppearance && (
+						{!!character?.firstMangaAppearance && (
 							<Typography variant="body1" gutterBottom>
 								First manga appearance:{' '}
 								<Typography color="GrayText" component="span">
-									{firstMangaAppearance}.
+									{character?.firstMangaAppearance}.
 								</Typography>
 							</Typography>
 						)}
 
-						{!!village && (
+						{!!character?.village && (
 							<Typography variant="body1" gutterBottom>
 								Village:{' '}
 								<Typography color="GrayText" component="span">
-									{village}.
+									{character?.village}.
 								</Typography>
 							</Typography>
 						)}
 
-						{!!description && (
+						{!!character?.description && (
 							<Typography variant="body1" gutterBottom>
 								Description:{' '}
 								<Typography color="GrayText" component="span">
-									{description}
+									{character?.description}
 								</Typography>
 							</Typography>
 						)}
@@ -126,9 +116,16 @@ const Page = ({ character }: CharacterProps) => {
 	);
 };
 
-export const getStaticPaths: GetStaticPaths = () => {
+export const getStaticPaths: GetStaticPaths = async () => {
+	const { data } = await client.query({ query: GET_CHARACTERS });
+
+	const paths =
+		data?.characters?.results?.slice(0, 10).map(({ id }) => ({
+			params: { id },
+		})) || [];
+
 	return {
-		paths: [],
+		paths,
 		fallback: true,
 	};
 };
@@ -138,6 +135,8 @@ export const getStaticProps: GetStaticProps = async (ctx: GetStaticPropsContext)
 		query: GET_CHARACTER,
 		variables: { id: ctx.params?.id as string },
 	});
+
+	if (!data) return { notFound: true };
 
 	return {
 		revalidate: 60, // One minute
