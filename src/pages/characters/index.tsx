@@ -9,6 +9,7 @@ import { GET_CHARACTERS } from 'graphql/getCharacters';
 
 import { Container } from 'components/Container';
 import { CharacterCard } from 'components/CharacterCard';
+import { SearchField } from 'components/SearchField';
 
 export default function Page() {
 	const theme = useTheme();
@@ -28,15 +29,13 @@ export default function Page() {
 			<Head>
 				<title>Naruto - Characters</title>
 			</Head>
+
 			<Container>
-				<Typography
-					gutterBottom
-					component="h1"
-					variant="h4"
-					sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-				>
+				<Typography gutterBottom component="h1" variant="h4" textAlign="center">
 					Characters
 				</Typography>
+
+				<SearchField disabled={loading} />
 
 				{loading ? (
 					<Box sx={{ display: 'flex', justifyContent: 'center', marginTop: 6 }}>
