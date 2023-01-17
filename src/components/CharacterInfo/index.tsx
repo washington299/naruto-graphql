@@ -1,9 +1,19 @@
 import { SyntheticEvent } from 'react';
 import { Box, Typography } from '@mui/material';
+import { styled } from '@mui/material/styles';
 
 import { Character } from 'graphql/__generated__/graphql';
 
 import { DEFAULT_IMG_ERROR } from 'const';
+
+const CharacterImage = styled('img')(({ theme }) => ({
+	minWidth: 300,
+	width: '100%',
+	height: 400,
+	[theme.breakpoints.up('md')]: {
+		maxWidth: 500,
+	},
+}));
 
 export type CharacterProps = {
 	character: Character;
@@ -15,13 +25,10 @@ export const CharacterInfo = ({ character }: CharacterProps) => {
 	};
 
 	return (
-		<Box sx={{ display: { md: 'flex' }, marginTop: 8 }}>
-			<img
+		<Box sx={{ display: { md: 'flex' }, marginTop: { md: 8 } }}>
+			<CharacterImage
 				src={character?.avatarSrc || DEFAULT_IMG_ERROR}
 				alt={character?.name}
-				width="100%"
-				height={400}
-				style={{ maxWidth: 500, minWidth: 300 }}
 				onError={handleImgError}
 			/>
 			<Box sx={{ marginLeft: { md: 4 } }}>
