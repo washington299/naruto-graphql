@@ -1,7 +1,8 @@
-import { useState, FormEvent } from 'react';
-import { InputBase, IconButton } from '@mui/material';
+import { ChangeEvent, useState } from 'react';
+import { InputBase } from '@mui/material';
 import { styled, alpha } from '@mui/material/styles';
-import SearchIcon from '@mui/icons-material/Search';
+
+import { useDebounce } from 'hooks/useDobounce';
 
 const Search = styled('div')(({ theme }) => ({
 	display: 'flex',
@@ -28,35 +29,30 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 type SearchFieldProps = {
 	disabled?: boolean;
+	name: string;
+	searchCharacters: (name: string) => void;
 };
 
-export const SearchField = ({ disabled = false }: SearchFieldProps) => {
-	const [value, setvalue] = useState('');
+export const SearchField = ({ disabled = false, name, searchCharacters }: SearchFieldProps) => {
+	const [value, setValue] = useState(name);
 
-	const isInputEmpty = value.length === 0;
+	const debounce = useDebounce(searchCharacters, 500);
 
-	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
+	const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+		setValue(e.target.value);
 
-		if (isInputEmpty) return;
-
-		console.log(value);
+		debounce(e.target.value);
 	};
 
 	return (
-		<form onSubmit={handleSubmit}>
-			<Search>
-				<StyledInputBase
-					placeholder="Search character..."
-					inputProps={{ 'aria-label': 'search' }}
-					disabled={disabled}
-					value={value}
-					onChange={(e) => setvalue(e.target.value)}
-				/>
-				<IconButton type="submit" sx={{ pointerEvents: disabled || isInputEmpty ? 'none' : 'all' }}>
-					<SearchIcon style={{ marginTop: 1, fontSize: 28, cursor: 'pointer' }} />
-				</IconButton>
-			</Search>
-		</form>
+		<Search>
+			<StyledInputBase
+				placeholder="Search character..."
+				inputProps={{ 'aria-label': 'search' }}
+				disabled={disabled}
+				value={value}
+				onChange={handleChange}
+			/>
+		</Search>
 	);
 };

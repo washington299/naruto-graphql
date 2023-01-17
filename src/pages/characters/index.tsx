@@ -16,13 +16,16 @@ export default function Page() {
 	const matches = useMediaQuery(theme.breakpoints.up('lg'));
 
 	const [page, setPage] = useState(1);
+	const [name, setName] = useState('');
 
-	const { data, loading } = useQuery(GET_CHARACTERS, { variables: { page } });
+	const { data, loading } = useQuery(GET_CHARACTERS, { variables: { page, name } });
 
 	const handlePagination = (_e: React.ChangeEvent<unknown>, value: number) => {
 		window.scrollTo(0, 0);
 		setPage(value);
 	};
+
+	const searchCharacters = (newName: string) => setName(newName);
 
 	return (
 		<>
@@ -35,7 +38,7 @@ export default function Page() {
 					Characters
 				</Typography>
 
-				<SearchField disabled={loading} />
+				<SearchField disabled={loading} name={name} searchCharacters={searchCharacters} />
 
 				{loading ? (
 					<Box sx={{ display: 'flex', justifyContent: 'center', marginTop: 6 }}>
