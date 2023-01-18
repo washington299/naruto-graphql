@@ -42,6 +42,7 @@ export const MenuMobile = () => {
 								component={NextLink}
 								href={`/${item.toLowerCase()}`}
 								underline="none"
+								onClick={toggleMenuMobile}
 							>
 								<ListItem sx={{ padding: 0 }}>
 									<ListItemButton>
