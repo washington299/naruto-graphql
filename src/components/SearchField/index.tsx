@@ -9,7 +9,7 @@ const Search = styled('div')(({ theme }) => ({
 	alignItems: 'center',
 	maxWidth: 400,
 	paddingLeft: theme.spacing(2),
-	marginBottom: 24,
+	marginBottom: theme.spacing(3),
 	border: `1px solid ${theme.palette.grey[300]}`,
 	borderRadius: theme.shape.borderRadius,
 	backgroundColor: alpha(theme.palette.common.white, 0.5),
@@ -30,13 +30,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 type SearchFieldProps = {
 	disabled?: boolean;
 	name: string;
-	searchCharacters: (name: string) => void;
+	handleNameChange: (name: string) => void;
 };
 
-export const SearchField = ({ disabled = false, name, searchCharacters }: SearchFieldProps) => {
+export const SearchField = ({ disabled = false, name, handleNameChange }: SearchFieldProps) => {
 	const [value, setValue] = useState(name);
 
-	const debounce = useDebounce(searchCharacters, 500);
+	const debounce = useDebounce(handleNameChange, 500);
 
 	const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		setValue(e.target.value);
