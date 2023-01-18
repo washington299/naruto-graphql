@@ -1,7 +1,6 @@
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
-import { Box, CircularProgress } from '@mui/material';
 
 import { client } from 'graphql/client';
 import { GET_CHARACTER } from 'graphql/getCharacter';
@@ -9,19 +8,14 @@ import { GET_CHARACTERS } from 'graphql/getCharacters';
 
 import { Container } from 'components/Container';
 import { CharacterInfo, CharacterProps } from 'components/CharacterInfo';
+import { Loading } from 'components/Loading';
 
 const Page = ({ character }: CharacterProps) => {
 	const { isFallback } = useRouter();
 
 	const title = `Character - ${character?.name}`;
 
-	if (isFallback) {
-		return (
-			<Box sx={{ display: 'flex', justifyContent: 'center', marginTop: 12 }}>
-				<CircularProgress />
-			</Box>
-		);
-	}
+	if (isFallback) return <Loading />;
 
 	return (
 		<>

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Head from 'next/head';
 import { useQuery } from '@apollo/client';
-import { Typography, Grid, Box, CircularProgress, Pagination } from '@mui/material';
+import { Typography, Grid, Box, Pagination } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
@@ -10,6 +10,7 @@ import { GET_CHARACTERS } from 'graphql/getCharacters';
 import { Container } from 'components/Container';
 import { CharacterCard } from 'components/CharacterCard';
 import { SearchField } from 'components/SearchField';
+import { Loading } from 'components/Loading';
 
 export default function Page() {
 	const theme = useTheme();
@@ -41,9 +42,7 @@ export default function Page() {
 				<SearchField disabled={loading} name={name} searchCharacters={searchCharacters} />
 
 				{loading ? (
-					<Box sx={{ display: 'flex', justifyContent: 'center', marginTop: 6 }}>
-						<CircularProgress />
-					</Box>
+					<Loading />
 				) : (
 					<Box>
 						<Grid container spacing={matches ? 1 : 4}>
