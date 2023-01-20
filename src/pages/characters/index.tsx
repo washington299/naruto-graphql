@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import Head from 'next/head';
-import { useQuery } from '@apollo/client';
 import { Typography } from '@mui/material';
 
-import { GET_CHARACTERS } from 'graphql/getCharacters';
+import { useGetCharacters } from 'graphql/getCharacters';
 
 import { Container } from 'components/Container';
 import { SearchField } from 'components/SearchField';
@@ -14,9 +13,12 @@ export default function Page() {
 	const [page, setPage] = useState(1);
 	const [name, setName] = useState('');
 
-	const { data, loading } = useQuery(GET_CHARACTERS, { variables: { page, name } });
+	const { data, loading } = useGetCharacters({ variables: { page, name } });
 
-	const handleNameChange = (newName: string) => setName(newName);
+	const handleNameChange = (newName: string) => {
+		setPage(1);
+		setName(newName);
+	};
 	const handlePageChange = (value: number) => setPage(value);
 
 	return (
