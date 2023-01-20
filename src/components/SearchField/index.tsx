@@ -1,13 +1,13 @@
 import { ChangeEvent, useState } from 'react';
-import { InputBase } from '@mui/material';
+import { InputBase, InputAdornment, IconButton } from '@mui/material';
+import Close from '@mui/icons-material/Close';
 import { styled, alpha } from '@mui/material/styles';
 
 import { useDebounce } from 'hooks/useDobounce';
 
-const Search = styled('div')(({ theme }) => ({
-	display: 'flex',
-	alignItems: 'center',
+const Input = styled(InputBase)(({ theme }) => ({
 	maxWidth: 400,
+	width: '100%',
 	paddingLeft: theme.spacing(2),
 	marginBottom: theme.spacing(3),
 	border: `1px solid ${theme.palette.grey[300]}`,
@@ -16,11 +16,6 @@ const Search = styled('div')(({ theme }) => ({
 	'&:hover': {
 		backgroundColor: alpha(theme.palette.common.white, 0.4),
 	},
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-	flex: 1,
-	width: '100%',
 	'& .MuiInputBase-input': {
 		padding: theme.spacing(1, 1, 1, 0),
 		transition: theme.transitions.create('width'),
@@ -38,21 +33,32 @@ export const SearchField = ({ disabled = false, name, handleNameChange }: Search
 
 	const debounce = useDebounce(handleNameChange, 500);
 
+	const resetInput = () => {
+		setValue('');
+		debounce('');
+	};
+
 	const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		setValue(e.target.value);
-
 		debounce(e.target.value);
 	};
 
 	return (
-		<Search>
-			<StyledInputBase
-				placeholder="Search character..."
-				inputProps={{ 'aria-label': 'search' }}
-				disabled={disabled}
-				value={value}
-				onChange={handleChange}
-			/>
-		</Search>
+		<Input
+			placeholder="Search character..."
+			inputProps={{ 'aria-label': 'search' }}
+			endAdornment={
+				<InputAdornment position="end">
+					{value && (
+						<IconButton onClick={resetInput}>
+							<Close />
+						</IconButton>
+					)}
+				</InputAdornment>
+			}
+			disabled={disabled}
+			value={value}
+			onChange={handleChange}
+		/>
 	);
 };
