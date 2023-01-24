@@ -35,11 +35,7 @@ export default function Villages() {
 
 							return (
 								<Grid key={_id} item xs={12} md={6} lg={4}>
-									<Card
-										src={img || '/assets/images/cloud-village.png'}
-										name={name}
-										description={description}
-									/>
+									<Card src={img} name={name} description={description} />
 								</Grid>
 							);
 						})}
