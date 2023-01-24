@@ -17,8 +17,8 @@ This is the API used to consume the data: https://narutoql.up.railway.app/graphq
 ## Mobile
 
 <p align="center">
-    <img src="/public/assets/design/mobile-home.png" width="350" />
-    <img src="/public/assets/design/mobile-characters.png" width="350" />
+    <img src="/public/assets/design/mobile-home.png" height="500" />
+    <img src="/public/assets/design/mobile-characters.png" height="500" />
 </p>
 
 ### Techs 💻
