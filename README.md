@@ -1,5 +1,5 @@
-<div style="display: flex; justify-content: center; align-items: center;">
-    <img src="/public/assets/images/naruto.png" width="70" height="70">
+<div align="center">
+    <img src="/public/assets/images/naruto.png" width="100" height="100" >
     <h1>Naruto GraphQL</h1>
 </div>
 
